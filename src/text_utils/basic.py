@@ -11,3 +11,8 @@ def keyword_extract(text: str, top_k: int = 5):
     words = re.findall(r"\b\w+\b", text.lower())
     counts = Counter(words)
     return [w for w, _ in counts.most_common(top_k)]
+
+def remove_stopwords(text: str):
+    stopwords = {"the", "is", "and", "a", "an"}
+    words = re.findall(r"\b\w+\b", text.lower())
+    return [word for word in words if word not in stopwords]
