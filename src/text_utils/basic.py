@@ -8,9 +8,11 @@ def sentence_split(text: str):
     return [s.strip() for s in re.split(r"[.!?]+", text) if s.strip()]
 
 def keyword_extract(text: str, top_k: int = 5):
+    stopwords = {"the", "is", "and", "a", "an", "of", "to", "in", "for", "on", "with"}
     words = re.findall(r"\b\w+\b", text.lower())
-    counts = Counter(words)
-    return [w for w, _ in counts.most_common(top_k)]
+    filtered_words = [word for word in words if word not in stopwords]
+    counts = Counter(filtered_words)
+    return [word for word, _ in counts.most_common(top_k)]
 
 def remove_stopwords(text: str):
     stopwords = {"the", "is", "and", "a", "an"}
