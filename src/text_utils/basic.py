@@ -16,3 +16,7 @@ def remove_stopwords(text: str):
     stopwords = {"the", "is", "and", "a", "an"}
     words = re.findall(r"\b\w+\b", text.lower())
     return [word for word in words if word not in stopwords]
+
+def generate_ngrams(text: str, n: int = 2):
+    words = re.findall(r"\b\w+\b", text.lower())
+    return [" ".join(words[i:i+n]) for i in range(len(words) - n + 1)]
